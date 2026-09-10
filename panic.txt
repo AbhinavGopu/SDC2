@@ -1,0 +1,543 @@
+LMS MAVEN + GIT + GITHUB + TOMCAT + DOCKER
+EXAM COMMAND CHEAT SHEET
+===============================================
+
+IMPORTANT:
+- Replace YOUR_EMAIL with your GitHub email.
+- Replace YOUR_GITHUB_USERNAME with your GitHub username.
+- Replace YOUR_DOCKER_USERNAME with your Docker Hub username.
+- Replace PROJECT_PATH with the actual LMS project path.
+- Replace GITHUB_URL with your actual GitHub repository URL.
+- Always run commands from the correct project folder.
+
+------------------------------------------------
+1. GIT INITIAL SETUP
+------------------------------------------------
+
+git --version
+
+git config --global user.name "AbhinavGopu"
+
+git config --global user.email "YOUR_EMAIL"
+
+git config --global user.name
+
+git config --global user.email
+
+
+------------------------------------------------
+2. GO TO LMS PROJECT
+------------------------------------------------
+
+cd "PROJECT_PATH"
+
+Example:
+
+cd "C:/Users/abhin/git/Lab-Internal-1-LMS"
+
+Check location:
+
+pwd
+
+Check files:
+
+ls
+
+You should see:
+
+pom.xml
+src
+target
+
+
+------------------------------------------------
+3. MAVEN COMMANDS
+------------------------------------------------
+
+mvn clean
+
+mvn install
+
+mvn test
+
+mvn package
+
+OR:
+
+mvn clean install test
+
+
+------------------------------------------------
+4. INITIALIZE GIT
+------------------------------------------------
+
+git init
+
+git status
+
+git add .
+
+git status
+
+git commit -m "Initial commit"
+
+git branch -M main
+
+
+------------------------------------------------
+5. CONNECT LMS TO GITHUB
+------------------------------------------------
+
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/LMS.git
+
+Check remote:
+
+git remote -v
+
+
+------------------------------------------------
+6. PUSH LMS TO GITHUB
+------------------------------------------------
+
+git push -u origin main
+
+
+------------------------------------------------
+7. IF PUSH SHOWS "FETCH FIRST"
+------------------------------------------------
+
+git pull origin main --allow-unrelated-histories --no-edit
+
+git push -u origin main
+
+
+------------------------------------------------
+8. GIT BRANCH COMMANDS
+------------------------------------------------
+
+Create a branch:
+
+git checkout -b feature/login
+
+OR:
+
+git switch -c feature/login
+
+See branches:
+
+git branch
+
+Switch to main:
+
+git checkout main
+
+OR:
+
+git switch main
+
+Push branch:
+
+git push -u origin feature/login
+
+
+------------------------------------------------
+9. GIT LOG
+------------------------------------------------
+
+git log --oneline
+
+
+------------------------------------------------
+10. UNSTAGE A FILE
+------------------------------------------------
+
+git restore --staged app.js
+
+Replace app.js with the actual file name.
+
+
+------------------------------------------------
+11. GIT STASH
+------------------------------------------------
+
+git stash
+
+git switch main
+
+git stash pop
+
+
+------------------------------------------------
+12. AMEND LAST COMMIT MESSAGE
+------------------------------------------------
+
+git commit --amend -m "Correct commit message"
+
+
+------------------------------------------------
+13. SAFELY REVERT A PUSHED COMMIT
+------------------------------------------------
+
+git revert HEAD
+
+git push
+
+
+------------------------------------------------
+14. MERGE BRANCH
+------------------------------------------------
+
+git switch main
+
+git merge feature/signup
+
+
+------------------------------------------------
+15. AFTER RESOLVING A MERGE CONFLICT
+------------------------------------------------
+
+git add .
+
+git commit -m "Resolve merge conflict"
+
+git push
+
+
+------------------------------------------------
+16. GIT STATUS / REMOTE CHECKS
+------------------------------------------------
+
+git status
+
+git remote -v
+
+git branch
+
+git log --oneline
+
+
+------------------------------------------------
+17. CREATE .gitignore
+------------------------------------------------
+
+Create file:
+
+touch .gitignore
+
+Open it:
+
+notepad .gitignore
+
+Put these lines inside:
+
+.env
+node_modules/
+target/
+
+Save and close Notepad.
+
+Then:
+
+git status
+
+git add .
+
+git commit -m "Add gitignore"
+
+
+------------------------------------------------
+18. CLONE LMS FROM GITHUB
+------------------------------------------------
+
+cd ~
+
+git clone https://github.com/YOUR_GITHUB_USERNAME/LMS.git
+
+cd LMS
+
+ls
+
+Check that pom.xml exists.
+
+
+------------------------------------------------
+19. DOCKER CHECK
+------------------------------------------------
+
+docker --version
+
+docker info
+
+
+------------------------------------------------
+20. BUILD DOCKER IMAGE
+------------------------------------------------
+
+docker build -t lms-app:1.0 .
+
+Check image:
+
+docker images
+
+
+------------------------------------------------
+21. RUN LMS IN TOMCAT DOCKER CONTAINER
+------------------------------------------------
+
+docker run -d --name lms-container -p 7070:8080 lms-app:1.0
+
+Check running container:
+
+docker ps
+
+
+Open in browser:
+
+http://localhost:7070
+
+If the WAR uses a context path:
+
+http://localhost:7070/LMS/
+
+
+------------------------------------------------
+22. IF PORT 7070 IS ALREADY USED
+------------------------------------------------
+
+Check containers:
+
+docker ps
+
+Stop the container using the port:
+
+docker stop CONTAINER_ID
+
+Remove it:
+
+docker rm CONTAINER_ID
+
+Then run LMS again:
+
+docker run -d --name lms-container -p 7070:8080 lms-app:1.0
+
+
+OR use port 7071:
+
+docker run -d --name lms-container -p 7071:8080 lms-app:1.0
+
+Then open:
+
+http://localhost:7071
+
+
+------------------------------------------------
+23. DOCKER CONTAINER COMMANDS
+------------------------------------------------
+
+Show running containers:
+
+docker ps
+
+Show all containers:
+
+docker ps -a
+
+Stop container:
+
+docker stop lms-container
+
+Start container:
+
+docker start lms-container
+
+Remove container:
+
+docker rm lms-container
+
+View container logs:
+
+docker logs lms-container
+
+
+------------------------------------------------
+24. DOCKER HUB
+------------------------------------------------
+
+Login:
+
+docker login
+
+Tag image:
+
+docker tag lms-app:1.0 YOUR_DOCKER_USERNAME/lms:1.0
+
+Push image:
+
+docker push YOUR_DOCKER_USERNAME/lms:1.0
+
+Check images:
+
+docker images
+
+
+------------------------------------------------
+25. COMPLETE BASIC LMS GIT WORKFLOW
+------------------------------------------------
+
+cd "PROJECT_PATH"
+
+ls
+
+mvn clean
+
+mvn install
+
+mvn test
+
+mvn package
+
+git init
+
+git add .
+
+git status
+
+git commit -m "Initial commit"
+
+git branch -M main
+
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/LMS.git
+
+git remote -v
+
+git push -u origin main
+
+
+------------------------------------------------
+26. IF GITHUB REPOSITORY HAS README
+------------------------------------------------
+
+If:
+
+git push -u origin main
+
+gives:
+
+rejected
+fetch first
+
+Run:
+
+git pull origin main --allow-unrelated-histories --no-edit
+
+Then:
+
+git push -u origin main
+
+
+------------------------------------------------
+27. COMPLETE DOCKER WORKFLOW
+------------------------------------------------
+
+cd ~
+
+git clone https://github.com/YOUR_GITHUB_USERNAME/LMS.git
+
+cd LMS
+
+ls
+
+docker --version
+
+docker info
+
+docker build -t lms-app:1.0 .
+
+docker images
+
+docker run -d --name lms-container -p 7070:8080 lms-app:1.0
+
+docker ps
+
+Open:
+
+http://localhost:7070
+
+Login to Docker Hub:
+
+docker login
+
+Tag:
+
+docker tag lms-app:1.0 YOUR_DOCKER_USERNAME/lms:1.0
+
+Push:
+
+docker push YOUR_DOCKER_USERNAME/lms:1.0
+
+
+------------------------------------------------
+28. MOST IMPORTANT COMMANDS TO MEMORIZE
+------------------------------------------------
+
+cd "PROJECT_PATH"
+
+ls
+
+mvn clean
+
+mvn install
+
+mvn test
+
+mvn package
+
+git init
+
+git add .
+
+git status
+
+git commit -m "Initial commit"
+
+git branch -M main
+
+git remote add origin GITHUB_URL
+
+git remote -v
+
+git push -u origin main
+
+
+------------------------------------------------
+29. EMERGENCY CHECKS
+------------------------------------------------
+
+Where am I?
+
+pwd
+
+What files are here?
+
+ls
+
+What is Git doing?
+
+git status
+
+What remote am I connected to?
+
+git remote -v
+
+What branch am I on?
+
+git branch
+
+What commits exist?
+
+git log --oneline
+
+
+===============================================
+END OF LMS EXAM COMMAND CHEAT SHEET
+===============================================
